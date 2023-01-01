@@ -1,0 +1,59 @@
+﻿<Window
+    x:Class="MsssWindowsManage.Dialog.WindowRemarkDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
+    xmlns:local="clr-namespace:MsssWindowsManage.Dialog"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="窗口信息"
+    Width="420"
+    Height="230"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <TextBlock
+            x:Name="titleBlock"
+            Grid.Row="0"
+            Grid.Column="0"
+            Margin="10"
+            Text="窗口标题：" />
+        <TextBox
+            x:Name="titleBox"
+            Grid.Row="0"
+            Grid.Column="1"
+            Width="160"
+            Margin="10"
+            IsReadOnly="True" />
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="10"
+            Text="窗口备注：" />
+        <TextBox
+            x:Name="remarkBox"
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="160"
+            Margin="10"
+            IsReadOnly="False" />
+
+        <Button
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Width="85"
+            Click="Button_Click"
+            Content="确定" />
+    </Grid>
+</Window>

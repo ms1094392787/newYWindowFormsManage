@@ -1,0 +1,109 @@
+﻿<UserControl
+    x:Class="MsssWindowsManage.View.WindowManageView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:in="http://schemas.microsoft.com/expression/2010/interactions"
+    xmlns:local="clr-namespace:MsssWindowsManage.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mo="clr-namespace:MsssWindowsManage.Model.WindowManageModels"
+    xmlns:vm="clr-namespace:MsssWindowsManage.ViewModel"
+    d:DataContext="{d:DesignInstance vm:WindowManageViewModel}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    AllowDrop="True"
+    mc:Ignorable="d">
+    <UserControl.Effect>
+        <DropShadowEffect
+            BlurRadius="0"
+            Opacity="0"
+            ShadowDepth="0" />
+    </UserControl.Effect>
+    <UserControl.Resources>
+        <ResourceDictionary Source="../Resource/ListBox.xaml" />
+    </UserControl.Resources>
+    <ListBox
+        Background="Transparent"
+        ItemContainerStyle="{StaticResource WindowListBoxStyle}"
+        ItemsSource="{Binding DataModel.DataSource}">
+        <ListBox.ItemsPanel>
+            <ItemsPanelTemplate>
+                <WrapPanel />
+            </ItemsPanelTemplate>
+        </ListBox.ItemsPanel>
+        <ListBox.ItemTemplate>
+            <DataTemplate DataType="{x:Type mo:ListBoxItemModel}">
+                <Grid
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    ToolTip="{Binding WindowTitle}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <StackPanel
+                        Margin="10,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Orientation="Horizontal">
+                        <!--  关闭按钮  -->
+                        <Button>
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border
+                                        x:Name="border"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        SnapsToDevicePixels="true">
+                                        <Path
+                                            x:Name="pathData"
+                                            Margin="5"
+                                            Data="M557.311759 513.248864l265.280473-263.904314c12.54369-12.480043 12.607338-32.704421 0.127295-45.248112-12.512727-12.576374-32.704421-12.607338-45.248112-0.127295L512.127295 467.904421 249.088241 204.063755c-12.447359-12.480043-32.704421-12.54369-45.248112-0.063647-12.512727 12.480043-12.54369 32.735385-0.063647 45.280796l262.975407 263.775299-265.151458 263.744335c-12.54369 12.480043-12.607338 32.704421-0.127295 45.248112 6.239161 6.271845 14.463432 9.440452 22.687703 9.440452 8.160624 0 16.319527-3.103239 22.560409-9.311437l265.216826-263.807983 265.440452 266.240344c6.239161 6.271845 14.432469 9.407768 22.65674 9.407768 8.191587 0 16.352211-3.135923 22.591372-9.34412 12.512727-12.480043 12.54369-32.704421 0.063647-45.248112L557.311759 513.248864z"
+                                            Stretch="Uniform" />
+                                    </Border>
+                                    <ControlTemplate.Resources>
+                                        <Style TargetType="Path">
+                                            <Setter Property="Fill" Value="White" />
+                                        </Style>
+                                    </ControlTemplate.Resources>
+                                    <ControlTemplate.Triggers>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
+                                                <Condition Property="IsMouseOver" Value="true" />
+                                            </MultiTrigger.Conditions>
+                                            <Setter TargetName="pathData" Property="Fill" Value="red" />
+                                            <Setter TargetName="border" Property="BorderBrush" Value="#3399CC" />
+                                        </MultiTrigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                    <in:CallMethodAction MethodName="DeleteContent" TargetObject="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+
+                    </StackPanel>
+                    <Image
+                        Width="230"
+                        Height="230"
+                        Margin="10"
+                        Source="{Binding ImgSource}" />
+                    <TextBlock
+                        Grid.Row="1"
+                        HorizontalAlignment="Center"
+                        Text="{Binding WindowRemark}" />
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                            <in:CallMethodAction MethodName="Execute" TargetObject="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Grid>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+    </ListBox>
+</UserControl>
